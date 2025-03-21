@@ -1,19 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: core
+  name: harbor-core
+  labels:
+    app: harbor
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: core
+      app: harbor-core
   template:
     metadata:
       labels:
-        app: core
+        app: harbor-core
     spec:
       containers:
         - name: core
           image: goharbor/harbor-core:v2.8.0
           ports:
             - containerPort: 80
+          volumeMounts:
+            - name: core-config
+              mountPath: /etc/core/app.conf
+              subPath: app.conf
+            - name: core-data
+              mountPath: /data
+      volumes:
+        - name: core-config
+          configMap:
+            name: harbor-config
+        - name: core-data
+          persistentVolumeClaim:
+            claimName: harbor-pvc
