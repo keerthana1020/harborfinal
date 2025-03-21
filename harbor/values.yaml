@@ -29,3 +29,8 @@ ingress:
   enabled: true
   host: harbor.example.com
   tls: false
+
+expose:
+  tls:
+    enabled: true
+    secretName: harbor-tls
