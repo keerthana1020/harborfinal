@@ -1,0 +1,12 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-db-init
+spec:
+  template:
+    spec:
+      containers:
+        - name: db-init
+          image: postgres:15
+          command: ["sh", "-c", "psql -U harbor -d harbordb -f /docker-entrypoint-initdb.d/init.sql"]
+      restartPolicy: OnFailure
