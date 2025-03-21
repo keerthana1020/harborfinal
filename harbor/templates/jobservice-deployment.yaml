@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: jobservice
-          image: goharbor/harbor-jobservice:v2.8.0
+          image: goharbor/harbor-jobservice:v2.12.2
           ports:
             - containerPort: 80
