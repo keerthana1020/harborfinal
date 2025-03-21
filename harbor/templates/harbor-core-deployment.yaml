@@ -24,7 +24,7 @@ spec:
               mountPath: /etc/core/app.conf
               subPath: app.conf
             - name: core-data
-              mountPath: /data
+              mountPath: /mnt/data/harbor
       volumes:
         - name: core-config
           configMap:
