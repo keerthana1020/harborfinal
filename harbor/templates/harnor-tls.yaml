@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: harbor-tls
+  namespace: harbor
+type: kubernetes.io/tls
+data:
+  tls.crt: <base64_encoded_tls.crt_here>
+  tls.key: <base64_encoded_tls.key_here>
