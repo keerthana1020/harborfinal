@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: registry
-          image: goharbor/registry-photon:v2.8.0
+          image: goharbor/registry-photon:v2.12.2
           ports:
             - containerPort: 5000
