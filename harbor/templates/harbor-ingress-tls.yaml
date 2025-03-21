@@ -2,9 +2,15 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: harbor-ingress
+  namespace: harbor
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod" # Optional if using cert-manager
 spec:
+  tls:
+    - hosts:
+        - harbor.example.com
+      secretName: harbor-tls
   rules:
     - host: harbor.example.com
       http:
