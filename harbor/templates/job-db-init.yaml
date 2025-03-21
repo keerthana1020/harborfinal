@@ -3,10 +3,22 @@ kind: Job
 metadata:
   name: job-db-init
 spec:
+  backoffLimit: 5
   template:
     spec:
       containers:
         - name: db-init
           image: postgres:15
           command: ["sh", "-c", "psql -U harbor -d harbordb -f /docker-entrypoint-initdb.d/init.sql"]
+          env:
+            - name: PGPASSWORD
+              value: "harborpassword"
+          volumeMounts:
+            - name: init-sql
+              mountPath: /docker-entrypoint-initdb.d
+              readOnly: true
+      volumes:
+        - name: init-sql
+          configMap:
+            name: init-sql-config
       restartPolicy: OnFailure
