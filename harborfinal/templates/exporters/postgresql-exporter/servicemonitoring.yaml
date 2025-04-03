@@ -8,4 +8,4 @@ spec:
     matchLabels:
       app: postgresql-exporter
   endpoints:
-    - port: 9187
+    - port: "9187"
