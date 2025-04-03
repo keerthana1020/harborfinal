@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: harbor-postgresql-config
+  namespace: harborfinal
+  labels:
+    app: harbor-postgresql
+data:
+  postgresql.conf: |
+    max_connections = 100
+    shared_buffers = 256MB

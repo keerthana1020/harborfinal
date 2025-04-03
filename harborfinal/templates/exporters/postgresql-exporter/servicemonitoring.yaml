@@ -1,0 +1,11 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: postgresql-exporter-monitor
+  namespace: harborfinal
+spec:
+  selector:
+    matchLabels:
+      app: postgresql-exporter
+  endpoints:
+    - port: 9187

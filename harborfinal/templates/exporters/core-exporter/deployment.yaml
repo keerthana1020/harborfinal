@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: core-exporter
+  namespace: harborfinal
+  labels:
+    app: core-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: core-exporter
+  template:
+    metadata:
+      labels:
+        app: core-exporter
+    spec:
+      containers:
+        - name: exporter
+          image: core-exporter:latest
+          ports:
+            - containerPort: 8080

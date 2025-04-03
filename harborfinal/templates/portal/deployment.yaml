@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: harbor-portal
+  namespace: harborfinal
+  labels:
+    app: harbor-portal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: harbor-portal
+  template:
+    metadata:
+      labels:
+        app: harbor-portal
+    spec:
+      containers:
+        - name: portal
+          image: goharbor/harbor-portal:v2.12.2
+          ports:
+            - containerPort: 80

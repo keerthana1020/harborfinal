@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: harbor-portal-config
+  namespace: harborfinal
+  labels:
+    app: harbor-portal
+data:
+  PORTAL_TITLE: "Harbor UI"
+  PORTAL_WELCOME: "Welcome to Harbor"

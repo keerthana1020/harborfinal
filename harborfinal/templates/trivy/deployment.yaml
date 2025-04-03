@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: harbor-trivy
+  namespace: harborfinal
+  labels:
+    app: harbor-trivy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: harbor-trivy
+  template:
+    metadata:
+      labels:
+        app: harbor-trivy
+    spec:
+      containers:
+        - name: trivy
+          image: aquasec/trivy:latest
+          args: ["server"]
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/trivy
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: harbor-trivy-pvc

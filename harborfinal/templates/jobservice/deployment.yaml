@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: harbor-jobservice
+  namespace: harborfinal
+  labels:
+    app: harbor-jobservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: harbor-jobservice
+  template:
+    metadata:
+      labels:
+        app: harbor-jobservice
+    spec:
+      containers:
+        - name: jobservice
+          image: goharbor/harbor-jobservice:v2.12.2
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/jobservice
+      volumes:
+        - name: config-volume
+          configMap:
+            name: harbor-jobservice-config

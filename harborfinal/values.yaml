@@ -1,0 +1,25 @@
+namespace: harborfinal
+
+postgresql:
+  enabled: true
+  image: postgres:15
+  replicas: 1
+  database: registry
+  username: harbor
+  passwordSecretName: harbor-db-secret
+  storage:
+    size: 10Gi
+    storageClass: gp3-csi
+    accessModes:
+      - ReadWriteOnce
+
+exporters:
+  postgresql:
+    enabled: true
+    image: postgresql-exporter:latest
+    service:
+      port: 9187
+
+serviceMonitor:
+  enabled: true
+  namespace: harborfinal

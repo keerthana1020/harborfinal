@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: harbor-core
+  namespace: harborfinal
+  labels:
+    app: harbor-core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: harbor-core
+  template:
+    metadata:
+      labels:
+        app: harbor-core
+    spec:
+      containers:
+        - name: core
+          image: goharbor/harbor-core:v2.12.2
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/core
+      volumes:
+        - name: config-volume
+          configMap:
+            name: harbor-core-config

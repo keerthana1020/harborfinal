@@ -1,0 +1,11 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: core-exporter-monitor
+  namespace: harborfinal
+spec:
+  selector:
+    matchLabels:
+      app: core-exporter
+  endpoints:
+    - port: 8080
