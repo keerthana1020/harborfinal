@@ -20,10 +20,26 @@ spec:
         - name: portal
           image: goharbor/harbor-portal:v2.12.2
           ports:
-            - containerPort: 80
+            - containerPort: 8080
           volumeMounts:
-            - name: nginx-temp
+            - name: client-temp
               mountPath: /etc/nginx/client_body_temp
+            - name: proxy-temp
+              mountPath: /etc/nginx/proxy_temp
+            - name: fastcgi-temp
+              mountPath: /etc/nginx/fastcgi_temp
+            - name: scgi-temp
+              mountPath: /etc/nginx/scgi_temp
+            - name: uwsgi-temp
+              mountPath: /etc/nginx/uwsgi_temp
       volumes:
-        - name: nginx-temp
+        - name: client-temp
+          emptyDir: {}
+        - name: proxy-temp
+          emptyDir: {}
+        - name: fastcgi-temp
+          emptyDir: {}
+        - name: scgi-temp
+          emptyDir: {}
+        - name: uwsgi-temp
           emptyDir: {}
