@@ -19,7 +19,7 @@ spec:
         - name: harbor-auth  # only if Harbor is private
       containers:
         - name: exporter
-          image: harbor.repo.local/harborfinal/core-exporter:v1.0.0
+          image: core-exporter:v1.0.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
