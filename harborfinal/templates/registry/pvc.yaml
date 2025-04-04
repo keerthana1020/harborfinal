@@ -7,7 +7,6 @@ spec:
   accessModes:
     - ReadWriteOnce
   storageClassName: ebs-gp3
-  volumeName: registry-pv
   resources:
     requests:
       storage: 20Gi
