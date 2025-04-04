@@ -9,7 +9,7 @@ postgresql:
   passwordSecretName: harbor-db-secret
   storage:
     size: 10Gi
-    storageClass: gp3-csi
+    storageClass: ebs-gp3
     accessModes:
       - ReadWriteOnce
 
