@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: harbor-portal
   namespace: harborfinal
+  labels:
+    app: harbor-portal
 spec:
   replicas: 1
   selector:
@@ -14,32 +16,15 @@ spec:
         app: harbor-portal
     spec:
       securityContext:
-        runAsUser: 1000
         runAsNonRoot: true
+        runAsUser: 1000
       containers:
         - name: portal
           image: goharbor/harbor-portal:v2.12.2
           ports:
-            - containerPort: 8080
-          volumeMounts:
-            - name: client-temp
-              mountPath: /etc/nginx/client_body_temp
-            - name: proxy-temp
-              mountPath: /etc/nginx/proxy_temp
-            - name: fastcgi-temp
-              mountPath: /etc/nginx/fastcgi_temp
-            - name: scgi-temp
-              mountPath: /etc/nginx/scgi_temp
-            - name: uwsgi-temp
-              mountPath: /etc/nginx/uwsgi_temp
-      volumes:
-        - name: client-temp
-          emptyDir: {}
-        - name: proxy-temp
-          emptyDir: {}
-        - name: fastcgi-temp
-          emptyDir: {}
-        - name: scgi-temp
-          emptyDir: {}
-        - name: uwsgi-temp
-          emptyDir: {}
+            - containerPort: 80
+          securityContext:
+            runAsUser: 1000
+            runAsNonRoot: true
+            capabilities:
+              add: ["NET_BIND_SERVICE"]
