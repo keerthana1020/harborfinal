@@ -15,10 +15,12 @@ spec:
       labels:
         app: core-exporter
     spec:
+      imagePullSecrets:
+        - name: harbor-auth  # only if Harbor is private
       containers:
         - name: exporter
-          image: core-exporter:latest
-          imagePullPolicy: IfNotPresent  # Use Always if pulling from remote
+          image: harbor.<your-domain>.com/harborfinal/core-exporter:v1.0.0
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           resources:
@@ -28,4 +30,3 @@ spec:
             limits:
               cpu: "500m"
               memory: "512Mi"
-      restartPolicy: Always
