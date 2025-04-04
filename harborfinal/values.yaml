@@ -30,40 +30,40 @@ persistence:
       claim: harbor-core-pvc
       size: 5Gi
       accessModes: ReadWriteOnce
-      volumeID: vol-0123456789abcdef0
+      volumeID: vol-097daf816c0760af7
 
     - name: registry-pv
       claim: registry-pvc
       size: 20Gi
       accessModes: ReadWriteOnce
-      volumeID: vol-0abcdef1234567890
+      volumeID: vol-097daf816c0760af7
 
     - name: jobservice-pv
       claim: jobservice-pvc
       size: 5Gi
       accessModes: ReadWriteOnce
-      volumeID: vol-0a1b2c3d4e5f67890
+      volumeID: vol-097daf816c0760af7
 
     - name: portal-pv
       claim: portal-pvc
       size: 5Gi
       accessModes: ReadWriteOnce
-      volumeID: vol-0123abcd4567ef890
+      volumeID: vol-097daf816c0760af7
 
     - name: trivy-pv
       claim: trivy-pvc
       size: 10Gi
       accessModes: ReadWriteOnce
-      volumeID: vol-09abcdef012345678
+      volumeID: vol-097daf816c0760af7
 
     - name: postgresql-pv
       claim: postgresql-pvc
       size: 10Gi
       accessModes: ReadWriteOnce
-      volumeID: vol-0f1e2d3c4b5a67890
-
+      volumeID: vol-097daf816c0760af7
+      
     - name: redis-pv
       claim: redis-pvc
       size: 5Gi
       accessModes: ReadWriteOnce
-      volumeID: vol-0a1b2c3d4e5f67891
+      volumeID: vol-097daf816c0760af7
