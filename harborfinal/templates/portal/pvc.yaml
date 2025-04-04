@@ -6,7 +6,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  volumeName: portal-pv
   resources:
     requests:
       storage: 5Gi
-  storageClassName: ""
