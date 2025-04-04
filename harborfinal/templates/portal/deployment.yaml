@@ -15,6 +15,9 @@ spec:
       labels:
         app: harbor-portal
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsNonRoot: true
       containers:
         - name: portal
           image: goharbor/harbor-portal:v2.12.2
