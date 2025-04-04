@@ -6,7 +6,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  volumeName: harbor-core-pv
   resources:
     requests:
       storage: 5Gi
-  storageClassName: ""
