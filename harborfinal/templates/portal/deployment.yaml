@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   name: harbor-portal
   namespace: harborfinal
-  labels:
-    app: harbor-portal
 spec:
   replicas: 1
   selector:
@@ -23,3 +21,9 @@ spec:
           image: goharbor/harbor-portal:v2.12.2
           ports:
             - containerPort: 8080
+          volumeMounts:
+            - name: nginx-temp
+              mountPath: /etc/nginx/client_body_temp
+      volumes:
+        - name: nginx-temp
+          emptyDir: {}
