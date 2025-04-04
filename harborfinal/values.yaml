@@ -13,6 +13,48 @@ postgresql:
     accessModes:
       - ReadWriteOnce
 
+harborCore:
+  persistence:
+    size: 5Gi
+    storageClass: ebs-gp3
+    accessModes:
+      - ReadWriteOnce
+
+jobservice:
+  persistence:
+    size: 5Gi
+    storageClass: ebs-gp3
+    accessModes:
+      - ReadWriteOnce
+
+portal:
+  persistence:
+    size: 5Gi
+    storageClass: ebs-gp3
+    accessModes:
+      - ReadWriteOnce
+
+redis:
+  persistence:
+    size: 5Gi
+    storageClass: ebs-gp3
+    accessModes:
+      - ReadWriteOnce
+
+registry:
+  persistence:
+    size: 20Gi
+    storageClass: ebs-gp3
+    accessModes:
+      - ReadWriteOnce
+
+trivy:
+  persistence:
+    size: 10Gi
+    storageClass: ebs-gp3
+    accessModes:
+      - ReadWriteOnce
+
 exporters:
   postgresql:
     enabled: true
