@@ -58,4 +58,4 @@ spec:
             name: harbor-jobservice-config
         - name: harbor-data
           persistentVolumeClaim:
-            claimName: harbor-jobservice-pvc  # Make sure PVC exists
+            claimName: jobservice-pvc  # Make sure PVC exists
