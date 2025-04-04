@@ -11,3 +11,7 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: gp3-csi
+  csi:
+    driver: ebs.csi.aws.com
+    volumeHandle: vol-097daf816c0760af7   # 🔥 Replace with your actual EBS Volume ID
+    fsType: ext4
