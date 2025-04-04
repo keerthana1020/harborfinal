@@ -1,12 +1,12 @@
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: PersistentVolume
 metadata:
   name: trivy-pv
-  namespace: harborfinal
+  namespace: harbor
 spec:
+  capacity:
+    storage: 10Gi
   accessModes:
     - ReadWriteOnce
-  resources:
-    requests:
-      storage: 10Gi
+  persistentVolumeReclaimPolicy: Retain
   storageClassName: gp3-csi
