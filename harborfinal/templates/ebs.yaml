@@ -1,0 +1,32 @@
+{{- range .Values.persistence.volumes }}
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .name }}
+spec:
+  capacity:
+    storage: {{ .size }}
+  volumeMode: Filesystem
+  accessModes:
+    - {{ .accessModes }}
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: gp3-csi
+  awsElasticBlockStore:
+    volumeID: {{ .volumeID }}
+    fsType: ext4
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .claim }}
+  namespace: {{ $.Values.namespace }}
+spec:
+  accessModes:
+    - {{ .accessModes }}
+  storageClassName: gp3-csi
+  resources:
+    requests:
+      storage: {{ .size }}
+  volumeName: {{ .name }}
+{{- end }}
