@@ -16,8 +16,9 @@ spec:
         app: harbor-jobservice
     spec:
       securityContext:
-        runAsNonRoot: true
         runAsUser: 1000
+        runAsNonRoot: true
+        fsGroup: 1000  # Ensures shared volumes are writable
       containers:
         - name: jobservice
           image: goharbor/harbor-jobservice:v2.12.2
@@ -26,7 +27,9 @@ spec:
           volumeMounts:
             - name: config-volume
               mountPath: /etc/jobservice/config.yaml
-              subPath: config.yaml
+              subPath: jobservice.conf  # Must match the key in ConfigMap
+            - name: harbor-data
+              mountPath: /harbor
           livenessProbe:
             httpGet:
               path: /api/v1/stats
@@ -42,7 +45,17 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsNonRoot: true
+      initContainers:
+        - name: fix-permissions
+          image: busybox
+          command: ["sh", "-c", "chown -R 1000:1000 /harbor"]
+          volumeMounts:
+            - name: harbor-data
+              mountPath: /harbor
       volumes:
         - name: config-volume
           configMap:
             name: harbor-jobservice-config
+        - name: harbor-data
+          persistentVolumeClaim:
+            claimName: harbor-jobservice-pvc  # Make sure PVC exists
