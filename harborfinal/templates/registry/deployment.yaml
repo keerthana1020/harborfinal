@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registry
+  namespace: harbor
+  labels:
+    app: harbor-registry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: harbor-registry
+  template:
+    metadata:
+      labels:
+        app: harbor-registry
+    spec:
+      containers:
+        - name: registry
+          image: goharbor/registry-photon:v2.12.2
+          ports:
+            - containerPort: 5000
+          volumeMounts:
+            - name: registry-storage
+              mountPath: /storage
+            - name: config-volume
+              mountPath: /etc/registry
+      volumes:
+        - name: registry-storage
+          persistentVolumeClaim:
+            claimName: registry-pvc
+        - name: config-volume
+          configMap:
+            name: registry-config
