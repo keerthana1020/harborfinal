@@ -6,9 +6,8 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: ebs-gp3
   volumeName: postgresql-pv
   resources:
     requests:
       storage: 10Gi
-      storageClassName: ebs-gp3
-
