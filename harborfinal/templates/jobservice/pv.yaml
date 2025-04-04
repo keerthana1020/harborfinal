@@ -2,6 +2,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: jobservice-pv
+  namespace: harborfinal
 spec:
   capacity:
     storage: 5Gi
