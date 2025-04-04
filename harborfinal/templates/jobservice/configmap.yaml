@@ -3,43 +3,15 @@ kind: ConfigMap
 metadata:
   name: harbor-jobservice-config
   namespace: harborfinal
-  labels:
-    app: harbor-jobservice
 data:
   config.yaml: |
-    log:
-      level: info
-      rotate_count: 50
-      rotate_size: 200M
-      location: /var/log/jobs.log
-
-    job_loggers:
-      - name: file
-        level: info
-        settings:
-          base_dir: /var/log/jobs
-          archive_dir: /var/log/jobs/archive
-          max_log_size: 1024
-          max_log_age: 30
-          compression: true
-
-    workers:
-      worker_pool_size: 10
-
-    redis:
-      redis_url: redis://harbor-redis:6379
-      namespace: harbor_job_service_namespace
-
     jobservice:
-      max_job_workers: 10
-      job_logger: file
-
-    metric:
-      enabled: false
-
-    notification:
-      webhook_job_max_retry: 3
-      webhook_job_retry_interval: 5
-
-    logger:
-      level: info
+      redis_url: redis://harbor-redis:6379
+    database:
+      type: "postgresql"
+      host: harbor-postgresql
+      port: 5432
+      username: postgres
+      password: rootpassword  # Replace with your actual password
+      database: registry
+      sslmode: disable
