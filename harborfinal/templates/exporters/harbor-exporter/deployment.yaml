@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: exporter
-          image: harbor-exporter:latest
+          image: goharbor/harbor-exporter:v2.13.0-rc1
           ports:
             - containerPort: 8080
