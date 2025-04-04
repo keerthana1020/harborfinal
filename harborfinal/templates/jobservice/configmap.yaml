@@ -11,7 +11,7 @@ data:
       type: "postgresql"
       host: harbor-postgresql
       port: 5432
-      username: postgres
-      password: rootpassword  # Replace with your actual password
+      username: harbor
+      password: password  # Replace with your actual password
       database: registry
       sslmode: disable
