@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: trivy-pvc
+  name: trivy-pv
   namespace: harborfinal
 spec:
   accessModes:
