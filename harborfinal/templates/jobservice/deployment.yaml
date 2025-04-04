@@ -15,6 +15,9 @@ spec:
       labels:
         app: harbor-jobservice
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
       containers:
         - name: jobservice
           image: goharbor/harbor-jobservice:v2.12.2
@@ -22,7 +25,23 @@ spec:
             - containerPort: 80
           volumeMounts:
             - name: config-volume
-              mountPath: /etc/jobservice
+              mountPath: /etc/jobservice/config.yaml
+              subPath: config.yaml
+          livenessProbe:
+            httpGet:
+              path: /api/v1/stats
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /api/v1/stats
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          securityContext:
+            runAsUser: 1000
+            runAsNonRoot: true
       volumes:
         - name: config-volume
           configMap:
