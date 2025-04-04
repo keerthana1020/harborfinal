@@ -3,8 +3,6 @@ kind: Deployment
 metadata:
   name: harbor-core
   namespace: harborfinal
-  labels:
-    app: harbor-core
 spec:
   replicas: 1
   selector:
@@ -20,10 +18,14 @@ spec:
           image: goharbor/harbor-core:v2.12.2
           ports:
             - containerPort: 80
+          env:
+            - name: CACHE_REDIS_URL
+              value: redis://harbor-redis:6379
           volumeMounts:
-            - name: config-volume
-              mountPath: /etc/core
+            - name: config
+              mountPath: /etc/core/app.conf
+              subPath: app.conf
       volumes:
-        - name: config-volume
+        - name: config
           configMap:
             name: harbor-core-config
