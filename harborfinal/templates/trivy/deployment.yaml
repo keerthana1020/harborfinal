@@ -27,4 +27,4 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: harbor-trivy-pvc
+            claimName: trivy-pvc
