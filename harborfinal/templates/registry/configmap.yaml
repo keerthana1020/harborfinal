@@ -1,26 +1,22 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: ConfigMap
 metadata:
-  name: harbor-registry
+  name: registry-config
   namespace: harborfinal
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: harbor-registry
-  template:
-    metadata:
-      labels:
-        app: harbor-registry
-    spec:
-      containers:
-      - name: registry
-        image: <your-registry-image>
-        volumeMounts:
-        - name: config-volume
-          mountPath: /etc/registry/config.yml
-          subPath: config.yml
-      volumes:
-      - name: config-volume
-        configMap:
-          name: registry-config
+  labels:
+    app: harbor-registry
+data:
+  config.yml: |
+    version: 0.1
+    log:
+      level: info
+    storage:
+      filesystem:
+        rootdirectory: /storage
+    http:
+      addr: :5000
+    health:
+      storagedriver:
+        enabled: true
+        interval: 10s
+        threshold: 3
