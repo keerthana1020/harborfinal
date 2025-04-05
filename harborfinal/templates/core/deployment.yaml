@@ -14,18 +14,13 @@ spec:
         app: harbor-core
     spec:
       containers:
-        - name: core
-          image: goharbor/harbor-core:v2.12.2
-          ports:
-            - containerPort: 80
-          env:
-            - name: CACHE_REDIS_URL
-              value: redis://harbor-redis:6379
-          volumeMounts:
-            - name: config
-              mountPath: /etc/core/app.conf
-              subPath: app.conf
+      - name: harbor-core
+        image: goharbor/harbor-core:v2.12.2
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/harbor/app.conf
+          subPath: app.conf
       volumes:
-        - name: config
-          configMap:
-            name: harbor-core-config
+      - name: config-volume
+        configMap:
+          name: harbor-core-config
